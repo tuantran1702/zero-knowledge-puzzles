@@ -10,7 +10,21 @@ pragma circom 2.1.4;
 
 template Range() {
     // your code here
-   
+   signal input a;
+   signal input lowerbound;
+   signal input upperbound;
+
+signal output out;
+   signal isAboveLowerBound;
+   signal isUnderUpperBound;
+
+   isAboveLowerBound <-- a >= lowerbound ? 1 : 0;
+   isAboveLowerBound * (1-isAboveLowerBound) === 0;
+   isUnderUpperBound <-- a <= upperbound ? 1 : 0;
+   isUnderUpperBound * (1-isUnderUpperBound) === 0;
+
+   out <== isAboveLowerBound * isUnderUpperBound;
+
 }
 
 component main  = Range();
